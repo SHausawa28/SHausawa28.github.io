@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result Compiler</title>
+</head>
+<body>
+    <h1>Student Result Compiler</h1>
+    <form action="/submit" method="post">
+        <label for="teacherName">Teacher's Name:</label>
+        <input type="text" id="teacherName" name="teacherName" required><br><br>
+
+        <label for="className">Class Name:</label>
+        <input type="text" id="className" name="className" required><br><br>
+
+        <label for="subjectCount">Number of Subjects:</label>
+        <input type="number" id="subjectCount" name="subjectCount" required><br><br>
+
+        <h2>Enter Student Information:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Roll Number</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- JavaScript will dynamically add rows based on subjectCount -->
+            </tbody>
+        </table><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        // JavaScript to dynamically create rows for entering student scores
+        document.getElementById('subjectCount').addEventListener('input', function() {
+            const subjectCount = parseInt(this.value);
+            const tableBody = document.querySelector('tbody');
+
+            tableBody.innerHTML = '';
+
+            for (let i = 1; i <= subjectCount; i++) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="text" name="studentName${i}" required></td>
+                    <td><input type="text" name="rollNumber${i}" required></td>
+                    <td><input type="number" name="score${i}" required></td>
+                `;
+                tableBody.appendChild(row);
+            }
+        });
+    </script>
+</body>
+</html>
